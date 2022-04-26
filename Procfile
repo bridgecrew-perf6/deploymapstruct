@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp target/classes:target/dependency/* com.example.mapstruct
+web: java -Dserver.port=$PORT -jar target/mapstruct-1.0.jar
