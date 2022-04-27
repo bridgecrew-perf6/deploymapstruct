@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     @Autowired
     private JWTGenerate jwtGenerate;
-
+    /**
+     * authenticate
+     */
     @Autowired
     UserServiceImpl userService;
     @PostMapping("/authenticate")
