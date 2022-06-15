@@ -16,8 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserSecurityDetailService userSecurityDetailService;
-    @Autowired
-    private JwtFilterRequest jwtFilterRequest;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userSecurityDetailService);
@@ -25,10 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-         http.cors().and().csrf().disable().authorizeRequests()
-                 .antMatchers("/**/authenticate").permitAll().anyRequest().authenticated()
-                 .and().sessionManagement()
-                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-         http.addFilterBefore(jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
+        http.cors().and().csrf().disable().authorizeRequests()
+                .antMatchers("/**/authenticate").permitAll().anyRequest().authenticated()
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }

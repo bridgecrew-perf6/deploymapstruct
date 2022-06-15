@@ -19,9 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     @Autowired
     private JWTGenerate jwtGenerate;
-    /**
-     * authenticate
-     */
     @Autowired
     UserServiceImpl userService;
     @PostMapping("/authenticate")
@@ -29,7 +26,7 @@ public class AuthController {
         User user = userService.findByEmail(request.getEmail());
         String jwt = "";
         if(BCrypt.checkpw(request.getPassword(),user.getPasswordHash())){
-            jwt = jwtGenerate.generateTokenv2(user);
+            jwt = jwtGenerate.generateToken(user);
             return new ResponseEntity<>(new AuthenticationResponse(jwt), HttpStatus.OK);
         }else {
             throw new InvalidCredentialsException();

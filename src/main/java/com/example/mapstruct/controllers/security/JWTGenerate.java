@@ -13,15 +13,7 @@ import java.util.Date;
 @Component
 public class JWTGenerate {
     private  String KEY = "lU1S4M4R1N";
-    public String generateToken(UserDetails userDetails){
-        return Jwts.builder().setSubject(userDetails.getUsername()).setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 *2))
-                .signWith(SignatureAlgorithm.HS256,KEY)
-                .compact();
-
-    }
-
-    public String generateTokenv2(User user){
+    public String generateToken(User user){
         return Jwts.builder().setSubject(user.getEmail()).setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 *2))
                 .signWith(SignatureAlgorithm.HS256,KEY)

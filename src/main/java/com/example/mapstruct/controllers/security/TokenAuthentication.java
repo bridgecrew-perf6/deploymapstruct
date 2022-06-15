@@ -1,44 +1,35 @@
 package com.example.mapstruct.controllers.security;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 
-public class TokenAuthentication extends AbstractAuthenticationToken
-{
+public class TokenAuthentication extends AbstractAuthenticationToken {
     String token;
-
     String subject;
-
     List<String> roles;
 
-    public TokenAuthentication( String token, String subject, List<String> roles )
-    {
-        super( null );
+    public TokenAuthentication(String token, String subject, List<String> roles) {
+        super(null);
         this.token = token;
         this.subject = subject;
         this.roles = roles;
     }
 
     @Override
-    public boolean isAuthenticated()
-    {
-        return !token.isEmpty() && !subject.isEmpty();
+    public boolean isAuthenticated() {
+       return !token.isEmpty() && !subject.isEmpty();
     }
 
     @Override
-    public Object getCredentials()
-    {
+    public Object getCredentials() {
         return token;
     }
 
     @Override
-    public Object getPrincipal()
-    {
+    public Object getPrincipal() {
         return subject;
     }
-
-
-
-
 }
